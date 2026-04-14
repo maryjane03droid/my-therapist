@@ -1,25 +1,39 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/navBar";
 import Home from "./pages/home";
-import Chat from "./pages/chat";
-import Mood from "./pages/mood";
-import Journal from "./pages/journal";
-import Groups from "./pages/supportGroup";
-import Profile from "./pages/profile";
-import Auth from "./pages/auth";
+
+function Counseling() {
+  return <h2 style={{ padding: "40px" }}>Counseling Page</h2>;
+}
+
+function Journal() {
+  return <h2 style={{ padding: "40px" }}>Journal Page</h2>;
+}
+
+function MoodTracker() {
+  return <h2 style={{ padding: "40px" }}>Mood Tracker Page</h2>;
+}
+
+function Login() {
+  return <h2 style={{ padding: "40px" }}>Login Page</h2>;
+}
+
+function Signup() {
+  return <h2 style={{ padding: "40px" }}>Signup Page</h2>;
+}
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/mood" element={<Mood />} />
+        <Route path="/counseling" element={<Counseling />} />
         <Route path="/journal" element={<Journal />} />
-        <Route path="/groups" element={<Groups />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/auth" element={<Auth />} />
+        <Route path="/moodtracker" element={<MoodTracker />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
