@@ -179,7 +179,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 500px;
+  min-height: 580px;
 }
 
 .visual-card {
@@ -191,7 +191,8 @@ a {
 .main-card {
   width: 320px;
   padding: 28px;
-  z-index: 2;
+  z-index: 3;
+  position: relative;
 }
 
 .main-card h3 {
@@ -225,20 +226,18 @@ a {
 .floating-card {
   position: absolute;
   padding: 16px 22px;
-  font-weight: 600;
-  color: #226c46;
-  background: #effaf2;
-  border: 1px solid #dff0e4;
+  border-radius: 16px;
+  z-index: 1;
 }
 
 .top-card {
-  top: 55px;
-  right: 10px;
+  top: 20px;
+  right: -20px;
 }
 
 .bottom-card {
-  bottom: 70px;
-  left: 10px;
+  bottom: 20px;
+  left: 20px;
 }
 
 .trust-section,
