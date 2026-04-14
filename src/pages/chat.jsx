@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Layout from "../components/layout";
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
@@ -7,36 +8,34 @@ export default function Chat() {
   const sendMessage = () => {
     if (!input) return;
 
-    setMessages([...messages, { text: input, sender: "user" }]);
-
-    // TEMP AI response
-    setMessages(prev => [
-      ...prev,
+    const newMessages = [
+      ...messages,
       { text: input, sender: "user" },
       { text: "I'm here for you 💚", sender: "ai" }
-    ]);
+    ];
 
+    setMessages(newMessages);
     setInput("");
   };
 
   return (
-    <div>
-      <h2>AI Support Chat</h2>
+    <Layout>
+      <div className="card">
+        <h2>Chat</h2>
 
-      <div>
-        {messages.map((msg, i) => (
+        {messages.map((m, i) => (
           <p key={i}>
-            <b>{msg.sender}:</b> {msg.text}
+            <b>{m.sender}:</b> {m.text}
           </p>
         ))}
-      </div>
 
-      <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Talk to me..."
-      />
-      <button onClick={sendMessage}>Send</button>
-    </div>
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Type..."
+        />
+        <button onClick={sendMessage}>Send</button>
+      </div>
+    </Layout>
   );
 }

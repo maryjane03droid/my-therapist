@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home";
-import Chat from "./pages/Chat";
-import Mood from "./pages/Mood";
-import Journal from "./pages/Journal";
-import Groups from "./pages/Groups";
-import Profile from "./pages/Profile";
+import Home from "./pages/home";
+import Chat from "./pages/chat";
+import Mood from "./pages/mood";
+import Journal from "./pages/journal";
+import Groups from "./pages/supportGroup";
+import Profile from "./pages/profile";
+import Auth from "./pages/auth";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/journal" element={<Journal />} />
         <Route path="/groups" element={<Groups />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </BrowserRouter>
   );

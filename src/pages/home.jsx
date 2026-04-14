@@ -1,17 +1,18 @@
-
 import { useNavigate } from "react-router-dom";
+import Layout from "../components/layout";
 
 export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h1>🌿 Mental Support App</h1>
-      <p>Your safe space for support and growth</p>
+    <Layout>
+      <div className="card" style={{ textAlign: "center" }}>
+        <h1>🌿 Mental Support App</h1>
 
-      <button onClick={() => navigate("/chat")}>Start Chat</button>
-      <button onClick={() => navigate("/mood")}>Check Mood</button>
-      <button onClick={() => navigate("/journal")}>Journal</button>
-    </div>
+        <button onClick={() => navigate("/chat")}>Chat</button>
+        <button onClick={() => navigate("/mood")}>Mood</button>
+        <button onClick={() => navigate("/journal")}>Journal</button>
+      </div>
+    </Layout>
   );
 }
