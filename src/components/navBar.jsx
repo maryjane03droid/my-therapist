@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="nav-logo">
-        <Link to="/">My Therapist</Link>
+        <Link to="/">My Therapist 🌿</Link>
       </div>
 
       <div className="nav-links">
