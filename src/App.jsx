@@ -1,21 +1,13 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/navBar";
-import Home from "./pages/home";
-import Mood from "./pages/mood";
-import Footer from "./components/Footer";
+// src/App.js
+import React from 'react';
+import AuthPage from './components/AuthPage';
 
-export default function App() {
+function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/mood" element={<Mood />} />
-        
-
-      </Routes>
-    
-    </BrowserRouter>
-    
+    <div className="App">
+      <AuthPage />
+    </div>
   );
 }
+
+export default App;
