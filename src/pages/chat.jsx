@@ -1,41 +1,17 @@
-import { useState } from "react";
-import Layout from "../components/layout";
+const getAIResponse = (input) => {
+  const text = input.toLowerCase();
 
-export default function Chat() {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
+  if (text.includes("sad") || text.includes("down")) {
+    return "I'm really sorry you're feeling this way 💚 You're not alone.";
+  }
 
-  const sendMessage = () => {
-    if (!input) return;
+  if (text.includes("happy") || text.includes("good")) {
+    return "That's amazing 😊 Keep embracing the positive energy!";
+  }
 
-    const newMessages = [
-      ...messages,
-      { text: input, sender: "user" },
-      { text: "I'm here for you 💚", sender: "ai" }
-    ];
+  if (text.includes("stress") || text.includes("tired")) {
+    return "It sounds overwhelming. Try taking a short break or deep breathing 🌿";
+  }
 
-    setMessages(newMessages);
-    setInput("");
-  };
-
-  return (
-    <Layout>
-      <div className="card">
-        <h2>Chat</h2>
-
-        {messages.map((m, i) => (
-          <p key={i}>
-            <b>{m.sender}:</b> {m.text}
-          </p>
-        ))}
-
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type..."
-        />
-        <button onClick={sendMessage}>Send</button>
-      </div>
-    </Layout>
-  );
-}
+  return "I'm here for you 💚 Tell me more.";
+};
