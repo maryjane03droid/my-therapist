@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { ref, push, set, onValue } from "firebase/database";
 import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
-import { getAIResponse } from "../services/aiService";
+import { getAIResponse } from "../services/serviceAi";
+
 
 export default function Chat() {
   const { user } = useAuth();
