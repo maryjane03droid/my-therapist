@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ref, push, set, onValue } from "firebase/database";
 import { db } from "../firebase";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../contexts/AuthContexts";
 
 const moodThemes = {
   Happy: {
