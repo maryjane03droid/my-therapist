@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ref, push, set, onValue } from "firebase/database";
 import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
-import { getAIResponse } from "../services/serviceAi";
+import { getAIResponse } from "../Service/aiServices";
 
 
 export default function Chat() {
