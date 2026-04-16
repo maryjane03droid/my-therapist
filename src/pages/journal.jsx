@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ref, push, set, onValue } from "firebase/database";
+import { ref, push, set, onValue, remove, update } from "firebase/database";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContexts";
 
@@ -34,6 +34,8 @@ export default function Journal() {
   const [latestMood, setLatestMood] = useState(null);
   const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState("");
+  const [editingId, setEditingId] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
 
   useEffect(() => {
     if (!user) {
@@ -125,23 +127,71 @@ export default function Journal() {
       setSaving(true);
       setNotice("");
 
-      const journalRef = ref(db, `users/${user.uid}/journals`);
-      const newEntryRef = push(journalRef);
+      if (editingId) {
+        const currentEntryRef = ref(db, `users/${user.uid}/journals/${editingId}`);
 
-      await set(newEntryRef, {
-        text: entry.trim(),
-        moodAtTime: latestMood?.mood || "Not logged",
-        createdAt: Date.now(),
-      });
+        await update(currentEntryRef, {
+          text: entry.trim(),
+        });
+
+        setNotice("Journal entry updated successfully.");
+        setEditingId(null);
+      } else {
+        const journalRef = ref(db, `users/${user.uid}/journals`);
+        const newEntryRef = push(journalRef);
+
+        await set(newEntryRef, {
+          text: entry.trim(),
+          moodAtTime: latestMood?.mood || "Not logged",
+          createdAt: Date.now(),
+        });
+
+        setNotice("Journal entry saved successfully.");
+      }
 
       setEntry("");
-      setNotice("Journal entry saved successfully.");
     } catch (error) {
       console.error(error);
       setNotice("Something went wrong while saving your entry.");
     } finally {
       setSaving(false);
     }
+  };
+
+  const handleEditJournal = (item) => {
+    setEntry(item.text || "");
+    setEditingId(item.id);
+    setNotice("Editing journal entry.");
+  };
+
+  const handleDeleteJournal = async (id) => {
+    if (!user) return;
+
+    try {
+      setDeletingId(id);
+      setNotice("");
+
+      const currentEntryRef = ref(db, `users/${user.uid}/journals/${id}`);
+      await remove(currentEntryRef);
+
+      if (editingId === id) {
+        setEditingId(null);
+        setEntry("");
+      }
+
+      setNotice("Journal entry deleted successfully.");
+    } catch (error) {
+      console.error(error);
+      setNotice("Something went wrong while deleting your entry.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingId(null);
+    setEntry("");
+    setNotice("Edit cancelled.");
   };
 
   return (
@@ -200,7 +250,7 @@ export default function Journal() {
       <div className="journal-layout">
         <div className="journal-main-card">
           <div className="section-heading">
-            <h2>Today’s journal entry</h2>
+            <h2>{editingId ? "Edit journal entry" : "Today’s journal entry"}</h2>
             <p>
               Be as honest as you need to be. This is your private space to reflect freely.
             </p>
@@ -220,8 +270,17 @@ export default function Journal() {
               onClick={handleSaveJournal}
               disabled={saving}
             >
-              {saving ? "Saving..." : "Save Journal Entry"}
+              {saving ? "Saving..." : editingId ? "Update Journal Entry" : "Save Journal Entry"}
             </button>
+
+            {editingId && (
+              <button
+                type="button"
+                onClick={handleCancelEdit}
+              >
+                Cancel
+              </button>
+            )}
           </div>
 
           {notice && <p className="journal-notice">{notice}</p>}
@@ -274,6 +333,24 @@ export default function Journal() {
                 </div>
 
                 <p className="journal-entry-text">{item.text}</p>
+
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => handleEditJournal(item)}
+                    disabled={saving}
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteJournal(item.id)}
+                    disabled={deletingId === item.id}
+                  >
+                    {deletingId === item.id ? "Deleting..." : "Delete"}
+                  </button>
+                </div>
               </div>
             ))}
           </div>

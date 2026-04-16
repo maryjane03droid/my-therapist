@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ref, push, set, onValue } from "firebase/database";
+import { ref, push, set, onValue, remove, update } from "firebase/database";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContexts";
 
@@ -27,6 +27,8 @@ export default function Mood() {
   const [moodHistory, setMoodHistory] = useState([]);
   const [message, setMessage] = useState("");
   const [saving, setSaving] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
 
   useEffect(() => {
     if (!user) {
@@ -136,26 +138,83 @@ export default function Mood() {
       setSaving(true);
       setMessage("");
 
-      const moodsRef = ref(db, `users/${user.uid}/moods`);
-      const newMoodRef = push(moodsRef);
+      if (editingId) {
+        const moodRef = ref(db, `users/${user.uid}/moods/${editingId}`);
 
-      await set(newMoodRef, {
-        mood: selectedMood.label,
-        score: selectedMood.score,
-        emoji: selectedMood.emoji,
-        note: note.trim(),
-        createdAt: Date.now(),
-      });
+        await update(moodRef, {
+          mood: selectedMood.label,
+          score: selectedMood.score,
+          emoji: selectedMood.emoji,
+          note: note.trim(),
+        });
+
+        setMessage("Mood updated successfully.");
+        setEditingId(null);
+      } else {
+        const moodsRef = ref(db, `users/${user.uid}/moods`);
+        const newMoodRef = push(moodsRef);
+
+        await set(newMoodRef, {
+          mood: selectedMood.label,
+          score: selectedMood.score,
+          emoji: selectedMood.emoji,
+          note: note.trim(),
+          createdAt: Date.now(),
+        });
+
+        setMessage("Mood saved successfully.");
+      }
 
       setSelectedMood(null);
       setNote("");
-      setMessage("Mood saved successfully.");
     } catch (err) {
       setMessage("There was a problem saving your mood.");
       console.error(err);
     } finally {
       setSaving(false);
     }
+  };
+
+  const handleEditMood = (entry) => {
+    const matchedMood =
+      moodOptions.find((mood) => mood.label === entry.mood) || null;
+
+    setSelectedMood(matchedMood);
+    setNote(entry.note || "");
+    setEditingId(entry.id);
+    setMessage("Editing selected mood entry.");
+  };
+
+  const handleDeleteMood = async (id) => {
+    if (!user) return;
+
+    try {
+      setDeletingId(id);
+      setMessage("");
+
+      const moodRef = ref(db, `users/${user.uid}/moods/${id}`);
+      await remove(moodRef);
+
+      if (editingId === id) {
+        setEditingId(null);
+        setSelectedMood(null);
+        setNote("");
+      }
+
+      setMessage("Mood deleted successfully.");
+    } catch (err) {
+      setMessage("There was a problem deleting your mood.");
+      console.error(err);
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingId(null);
+    setSelectedMood(null);
+    setNote("");
+    setMessage("Edit cancelled.");
   };
 
   return (
@@ -187,7 +246,7 @@ export default function Mood() {
 
         <div className="mood-hero-art">
           <svg viewBox="0 0 320 220" className="mood-svg" aria-hidden="true">
-            <circle cx="230" cy="55" r="28" fill="#c2e2cf" />
+            <circle cx="230" cy="55" r="28" fill="#92a098" />
             <circle cx="85" cy="70" r="42" fill="#d9efe2" />
             <rect x="55" y="85" width="210" height="105" rx="24" fill="#ffffff" stroke="#cfe2d7" />
             <circle cx="120" cy="125" r="20" fill="#eef7f1" />
@@ -246,7 +305,7 @@ export default function Mood() {
           <div className="mood-panel save-panel">
             <div className="save-panel-content">
               <div>
-                <h3>Save today’s check-in</h3>
+                <h3>{editingId ? "Update this check-in" : "Save today’s check-in"}</h3>
                 <p>Your note and mood will be added to your personal mood history.</p>
               </div>
 
@@ -255,9 +314,19 @@ export default function Mood() {
                 onClick={handleSaveMood}
                 disabled={saving}
               >
-                {saving ? "Saving..." : "Save Mood"}
+                {saving ? "Saving..." : editingId ? "Update Mood" : "Save Mood"}
               </button>
             </div>
+
+            {editingId && (
+              <button
+                type="button"
+                className="mood-cancel-btn"
+                onClick={handleCancelEdit}
+              >
+                Cancel Edit
+              </button>
+            )}
 
             {message && <p className="mood-message">{message}</p>}
           </div>
@@ -356,6 +425,25 @@ export default function Mood() {
                     <p className="history-card-note">
                       {entry.note || "No note added."}
                     </p>
+
+                    <div className="history-card-actions">
+                      <button
+                        type="button"
+                        className="history-edit-btn"
+                        onClick={() => handleEditMood(entry)}
+                      >
+                        Edit
+                      </button>
+
+                      <button
+                        type="button"
+                        className="history-delete-btn"
+                        onClick={() => handleDeleteMood(entry.id)}
+                        disabled={deletingId === entry.id}
+                      >
+                        {deletingId === entry.id ? "Deleting..." : "Delete"}
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>

@@ -2476,3 +2476,77 @@ a {
     grid-template-columns: 1fr;
   }
 }
+/* Button container (keeps them aligned nicely) */
+.journal-entry-card div button {
+  margin-right: 8px;
+}
+
+/* Edit button */
+.journal-entry-card button:first-of-type {
+  background-color: #dff3e7;
+  color: #17663f;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.journal-entry-card button:first-of-type:hover {
+  background-color: #c8ead9;
+}
+
+/* Delete button */
+.journal-entry-card button:last-of-type {
+  background-color: #ffe2e2;
+  color: #b42318;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.journal-entry-card button:last-of-type:hover {
+  background-color: #ffc9c9;
+}
+
+/* Disabled state */
+.journal-entry-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+  
+  .history-card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.history-edit-btn,
+.history-delete-btn,
+.mood-cancel-btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.history-edit-btn {
+  background: #dff3e7;
+  color: #17663f;
+}
+
+.history-delete-btn {
+  background: #ffe2e2;
+  color: #b42318;
+}
+
+.mood-cancel-btn {
+  margin-top: 10px;
+  background: #f1f5f3;
+  color: #1f2937;
+}
