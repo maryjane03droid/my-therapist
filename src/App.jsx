@@ -2,14 +2,14 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-import Home from "./pages/Home";
+import Home from "./pages/home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Mood from "./pages/Mood";
-import Journal from "./pages/Journal";
-import Chat from "./pages/Chat";
-import Profile from "./pages/Profile";
-import SupportGroup from "./pages/SupportGroup";
+import Mood from "./pages/mood";
+import Journal from "./pages/journal";
+import Chat from "./pages/chat";
+import Profile from "./pages/profile";
+import SupportGroup from "./pages/supportGroup";
 
 export default function App() {
   return (
