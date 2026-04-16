@@ -3,6 +3,7 @@ import { ref, push, set, onValue } from "firebase/database";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContexts";
 import { getAIResponse } from "../Service/aiServices";
+import { FaComments } from "react-icons/fa";
 
 
 export default function Chat() {
@@ -96,13 +97,9 @@ export default function Chat() {
           </p>
         </div>
 
-        <div className="chat-hero-art">
-          <div className="chat-illustration-card">
-            <div className="chat-bubble bubble-one">You are safe here</div>
-            <div className="chat-bubble bubble-two">Let’s talk it through</div>
-            <div className="chat-avatar">🤖</div>
-          </div>
-        </div>
+      <div className="chat-hero-visual">
+  <FaComments className="chat-hero-icon" />
+</div>
       </div>
 
       <div className="chat-layout">

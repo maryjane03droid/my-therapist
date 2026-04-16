@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ref, push, set, onValue, remove, update } from "firebase/database";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContexts";
+import { FaBrain } from "react-icons/fa";
 
 const moodOptions = [
   { label: "Happy", score: 5, emoji: "😊", desc: "Feeling positive and energetic" },
@@ -245,17 +246,7 @@ export default function Mood() {
         </div>
 
         <div className="mood-hero-art">
-          <svg viewBox="0 0 320 220" className="mood-svg" aria-hidden="true">
-            <circle cx="230" cy="55" r="28" fill="#92a098" />
-            <circle cx="85" cy="70" r="42" fill="#d9efe2" />
-            <rect x="55" y="85" width="210" height="105" rx="24" fill="#ffffff" stroke="#cfe2d7" />
-            <circle cx="120" cy="125" r="20" fill="#eef7f1" />
-            <circle cx="200" cy="125" r="20" fill="#eef7f1" />
-            <path d="M105 155 C125 175, 195 175, 215 155" fill="none" stroke="#17663f" strokeWidth="8" strokeLinecap="round" />
-            <circle cx="120" cy="125" r="7" fill="#17663f" />
-            <circle cx="200" cy="125" r="7" fill="#17663f" />
-            <rect x="95" y="35" width="128" height="22" rx="11" fill="#17663f" opacity="0.16" />
-          </svg>
+          <FaBrain className="mood-hero-icon" />
         </div>
       </div>
 

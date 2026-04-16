@@ -2,27 +2,32 @@ import { useEffect, useMemo, useState } from "react";
 import { ref, push, set, onValue, remove, update } from "firebase/database";
 import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContexts";
-
+import { FaPen } from "react-icons/fa";
 const moodThemes = {
   Happy: {
     emoji: "😊",
-    message: "You seem to be in a lighter space today. This is a good time to reflect on what is going well.",
+    message:
+      "You seem to be in a lighter space today. This is a good time to reflect on what is going well.",
   },
   Calm: {
     emoji: "😌",
-    message: "You seem emotionally steady today. Try writing about what is helping you feel grounded.",
+    message:
+      "You seem emotionally steady today. Try writing about what is helping you feel grounded.",
   },
   Neutral: {
     emoji: "😐",
-    message: "Today may feel balanced or ordinary. Even small reflections can help you understand yourself better.",
+    message:
+      "Today may feel balanced or ordinary. Even small reflections can help you understand yourself better.",
   },
   Anxious: {
     emoji: "😟",
-    message: "You may be carrying worry or tension today. Writing things down can help slow racing thoughts.",
+    message:
+      "You may be carrying worry or tension today. Writing things down can help slow racing thoughts.",
   },
   Sad: {
     emoji: "😢",
-    message: "Today may feel emotionally heavy. Be gentle with yourself and write freely without pressure.",
+    message:
+      "Today may feel emotionally heavy. Be gentle with yourself and write freely without pressure.",
   },
 };
 
@@ -105,7 +110,8 @@ export default function Journal() {
     if (!latestMood?.mood) {
       return {
         emoji: "📝",
-        message: "You haven’t logged a mood today yet, but you can still write what is on your mind.",
+        message:
+          "You haven’t logged a mood today yet, but you can still write what is on your mind.",
       };
     }
 
@@ -128,7 +134,10 @@ export default function Journal() {
       setNotice("");
 
       if (editingId) {
-        const currentEntryRef = ref(db, `users/${user.uid}/journals/${editingId}`);
+        const currentEntryRef = ref(
+          db,
+          `users/${user.uid}/journals/${editingId}`,
+        );
 
         await update(currentEntryRef, {
           text: entry.trim(),
@@ -201,20 +210,13 @@ export default function Journal() {
           <span className="journal-badge">Private Reflection Space</span>
           <h1>Write what is on your mind today</h1>
           <p>
-            Use this space to reflect, release thoughts, and keep a personal record
-            of how you are feeling over time.
+            Use this space to reflect, release thoughts, and keep a personal
+            record of how you are feeling over time.
           </p>
         </div>
 
-        <div className="journal-hero-art">
-          <div className="journal-art-card">
-            <div className="journal-note-sheet">
-              <span className="sheet-line"></span>
-              <span className="sheet-line"></span>
-              <span className="sheet-line short"></span>
-              <div className="sheet-emoji">📝</div>
-            </div>
-          </div>
+        <div className="journal-hero-visual">
+          <FaPen className="journal-hero-icon" />
         </div>
       </div>
 
@@ -250,9 +252,12 @@ export default function Journal() {
       <div className="journal-layout">
         <div className="journal-main-card">
           <div className="section-heading">
-            <h2>{editingId ? "Edit journal entry" : "Today’s journal entry"}</h2>
+            <h2>
+              {editingId ? "Edit journal entry" : "Today’s journal entry"}
+            </h2>
             <p>
-              Be as honest as you need to be. This is your private space to reflect freely.
+              Be as honest as you need to be. This is your private space to
+              reflect freely.
             </p>
           </div>
 
@@ -270,14 +275,15 @@ export default function Journal() {
               onClick={handleSaveJournal}
               disabled={saving}
             >
-              {saving ? "Saving..." : editingId ? "Update Journal Entry" : "Save Journal Entry"}
+              {saving
+                ? "Saving..."
+                : editingId
+                  ? "Update Journal Entry"
+                  : "Save Journal Entry"}
             </button>
 
             {editingId && (
-              <button
-                type="button"
-                onClick={handleCancelEdit}
-              >
+              <button type="button" onClick={handleCancelEdit}>
                 Cancel
               </button>
             )}
@@ -315,7 +321,10 @@ export default function Journal() {
         {entries.length === 0 ? (
           <div className="journal-empty-state">
             <h3>No journal entries yet</h3>
-            <p>Your saved reflections will appear here after you write your first entry.</p>
+            <p>
+              Your saved reflections will appear here after you write your first
+              entry.
+            </p>
           </div>
         ) : (
           <div className="journal-history-list">

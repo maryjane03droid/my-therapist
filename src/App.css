@@ -152,7 +152,13 @@ a {
   margin-bottom: 24px;
   overflow: hidden;
 }
-
+.mood-hero-icon {
+  font-size: 200px;
+  color: #17663f;
+  background: #eef7f1;
+  padding: 20px;
+  border-radius: 20px;
+}
 .mood-hero-text-block h1 {
   font-size: 2.2rem;
   line-height: 1.15;
@@ -178,8 +184,8 @@ a {
 
 .mood-hero-art {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .mood-svg {
@@ -664,7 +670,14 @@ a {
   align-items: center;
   justify-content: center;
 }
-
+.home-hero-icon {
+  font-size: 240px;
+  color: #17663f;
+  background: #eef7f1;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(23, 102, 63, 0.1);
+}
 .hero-illustration-card {
   position: relative;
   width: 100%;
@@ -1125,7 +1138,11 @@ a {
   align-items: center;
   justify-content: center;
 }
-
+.chat-hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .chat-illustration-card {
   width: 100%;
   min-height: 250px;
@@ -1302,7 +1319,14 @@ a {
   line-height: 1.6;
   margin-bottom: 16px;
 }
-
+.chat-hero-icon {
+  font-size: 240px;
+  color: #17663f;
+  background: #eef7f1;
+  padding: 28px;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(23, 102, 63, 0.1);
+}
 .chat-messages {
   display: flex;
   flex-direction: column;
@@ -1657,7 +1681,11 @@ a {
   border-radius: 18px;
   padding: 18px;
 }
-
+.journal-hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .journal-summary-item span {
   display: block;
   color: #6b7280;
@@ -1856,6 +1884,14 @@ a {
     width: 100%;
   }
 }
+.journal-hero-icon {
+  font-size: 240px;
+  color: #17663f;
+  background: #eef7f1;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(23, 102, 63, 0.1);
+}
 .support-screen {
   max-width: 1200px;
   margin: 0 auto;
@@ -1952,7 +1988,11 @@ a {
   font-size: 2.3rem;
   box-shadow: 0 16px 28px rgba(23, 102, 63, 0.18);
 }
-
+.support-hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .support-bubble {
   position: absolute;
   background: rgba(255, 255, 255, 0.96);
@@ -2029,6 +2069,14 @@ a {
 
 .support-emergency-top h3 {
   color: #173224;
+}
+.support-hero-icon {
+  font-size: 240px;
+  color: #17663f;
+  background: #eef7f1;
+  padding: 28px;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(23, 102, 63, 0.1);
 }
 
 .support-big-number {

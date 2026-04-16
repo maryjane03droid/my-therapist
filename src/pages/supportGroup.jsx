@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FaUsers } from "react-icons/fa";
 
 const emergencyContacts = [
   {
@@ -85,13 +86,9 @@ export default function SupportGroup() {
           </div>
         </div>
 
-        <div className="support-hero-art">
-          <div className="support-illustration-card">
-            <div className="support-bubble bubble-a">Reach out early</div>
-            <div className="support-bubble bubble-b">Help is available</div>
-            <div className="support-avatar">🤝</div>
-          </div>
-        </div>
+        <div className="support-hero-visual">
+  <FaUsers className="support-hero-icon" />
+</div>
       </div>
 
       <div className="support-alert-strip">
