@@ -23,10 +23,10 @@ The app provides users with tools to track mood, reflect through journaling, acc
 ![Chat Page](![chat ai](image-3.png))
 
 ### 👥 Support Groups
-![Support Group](![supportgroup](image-4.png))
+![Support Group](![supportgroup ](image-6.png))
 
 ### 🔐 Authentication (Login/Signup)
-![Auth Page](![Authentication](image-5.png))
+![Auth Page](![auth page](image-7.png))
 
 ---
 
