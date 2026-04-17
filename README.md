@@ -14,19 +14,19 @@ The app provides users with tools to track mood, reflect through journaling, acc
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home Page](![home page](image-1.png))
+![Home Page](![home page](image-8.png))
 
 ### 😊 Mood Tracker
-![Mood Page](![mood page](image-2.png))
+![Mood Page](![mood page](image-9.png))
 
 ### 💬 AI Chat Support
-![Chat Page](![chat ai](image-3.png))
+![Chat Page](![chat ai](image-10.png))
 
 ### 👥 Support Groups
-![Support Group](![supportgroup ](image-6.png))
+![Support Group](![supportgroup ](image-11.png))
 
 ### 🔐 Authentication (Login/Signup)
-![Auth Page](![auth page](image-7.png))
+![Auth Page](![auth page](image.png))
 
 ---
 
